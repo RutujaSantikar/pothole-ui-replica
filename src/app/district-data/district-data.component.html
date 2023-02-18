@@ -4,7 +4,7 @@
    <form action="" [formGroup]="dataForm">
   <mat-form-field appearance="outline" >
       <mat-label>District</mat-label>
-      <mat-select formControlName="disData" (change)="onChangeDistrict($event.target)">
+      <mat-select formControlName="disData" (selectionChange)="onChangeDistrict($event.value)" >
         <mat-option *ngFor="let district of getDistrictData" [value]="district.disId">
           {{district.disName}}
 
@@ -15,7 +15,7 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Division</mat-label>
-      <mat-select formControlName="divisionData">
+      <mat-select formControlName="divisionData" >
         <mat-option *ngFor="let division of getDivisionData" [value]="division.divId">
          {{division.divName}}}
         </mat-option>

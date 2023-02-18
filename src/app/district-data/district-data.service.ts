@@ -17,7 +17,7 @@ export class DistrictDataService {
     return  this.http.get(url , {params : queryParams});
   }
 
-  public getDivisionData(divId:any, disId:any) : Observable<any> {
+  public getDivisionData(divId:any,disId:any) : Observable<any> {
   const url = "http://114.143.217.43:8080/getDivisionsV2?disId="+disId+"&divId="+divId;
     let queryParams = new HttpParams();
     queryParams =  queryParams.append('divId', divId);

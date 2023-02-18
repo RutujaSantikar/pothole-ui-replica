@@ -13,12 +13,11 @@ export class DistrictDataComponent implements OnInit{
   getDistrictData:any[]= [];
   getDivisionData:any[]= [];
   getSubDivisionData:any[]= [];
-
-     disId = GlobalVarComponent.disId;
-      disName = GlobalVarComponent.disName;
-      divId = GlobalVarComponent.divId;
-      divName = GlobalVarComponent.divName;
-      sudId = GlobalVarComponent.sudId;
+  disId = GlobalVarComponent.disId;
+  disName = GlobalVarComponent.disName;
+  divId = GlobalVarComponent.divId;
+  divName = GlobalVarComponent.divName;
+  sudId = GlobalVarComponent.sudId;
 
 
   constructor(private districtDataService : DistrictDataService) { }
