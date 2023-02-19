@@ -2,6 +2,7 @@ import { Component , OnInit} from '@angular/core';
 import { DistrictDataService } from './district-data.service';
 import { FormGroup , FormControl} from '@angular/forms';
 import { GlobalVarComponent } from '../global-var/global-var.component';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-district-data',
@@ -10,9 +11,15 @@ import { GlobalVarComponent } from '../global-var/global-var.component';
 })
 export class DistrictDataComponent implements OnInit{
 
-  getDistrictData:any[]= [];
-  getDivisionData:any[]= [];
-  getSubDivisionData:any[]= [];
+  getDistrict:any[]= [];
+  getDivision:any[]= [];
+  getSubDivision:any[]= [];
+  // disId='';
+  // disName='';
+  // divId='';
+  // divName='';
+  // sudId='';
+
   disId = GlobalVarComponent.disId;
   disName = GlobalVarComponent.disName;
   divId = GlobalVarComponent.divId;
@@ -31,41 +38,67 @@ export class DistrictDataComponent implements OnInit{
      });
 
 
+     onChangeDistrict(disId:any){
+
+      if(disId){
+        this.districtDataService.getDivision(disId).subscribe((response:any) => {
+        console.log(response);
+        this.getDivision= response.data;
+         this.getSubDivision=[];
+      });
+
+      }
+      else{
+        this.getDivision=[];
+        this.getSubDivision=[];
+      }
+     }
+
+
+     onChangeDivision(divId:any){
+
+      if(divId)   {
+        this.districtDataService.getSubDivision(this.disId,divId).subscribe((response:any) => {
+        console.log(response);
+        this.getSubDivision= response.data;
+        //  this.getSubDivision=[];
+      });
+
+      }
+      else{
+        this.getSubDivision=[];
+
+      }
+     }
+
+
+
+
 
   ngOnInit(): void {
-    this.getDistrictData=[];
-    this.districtDataService.getDistrictData(this.disId, this.disName).subscribe((response:any) => {
+    this.getDistrict=[];
+    this.districtDataService.getDistrict(this.disId).subscribe((response:any) => {
     console.log(response);
-    this.getDistrictData= response.data;
-    console.log(this.getDistrictData) });
+    this.getDistrict= response.data;
+    console.log(this.getDistrict) });
 
-      this.getDivisionData=[];
-      this.districtDataService.getDivisionData(this.divId, this.disId).subscribe((response:any) => {
+      this.getDivision=[];
+      this.districtDataService.getDivision(this.divId).subscribe((response:any) => {
       console.log(response);
-      this.getDivisionData= response.data;
-      console.log(this.getDivisionData)});
+      this.getDivision= response.data;
+      console.log(this.getDivision)});
 
-      this.getSubDivisionData=[];
-      this.districtDataService.getSubDivisionData(this.disId,this.divId,this.sudId).subscribe((response:any) => {
+      this.getSubDivision=[];
+      this.districtDataService.getSubDivision(this.disId,this.divId).subscribe((response:any) => {
      console.log(response);
-      this.getSubDivisionData= response.data;
-      console.log(this.getSubDivisionData)
+      this.getSubDivision= response.data;
+      console.log(this.getSubDivision)
 
       });
 
 }
 
-   onChangeDistrict(disId :any){
 
-   if(disId){
-     this.districtDataService.getDivisionData(this.divId, this.disId).subscribe((response:any) => {
-       this.getDivisionData= response.data;
-       console.log(this.getDivisionData)
-     });
-
-   }
-
-  }
 
   view(){
 
