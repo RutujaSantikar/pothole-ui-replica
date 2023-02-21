@@ -49,8 +49,8 @@
 
        </div>
 
-      <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" >
+      <div class="mat-elevation-z8 w-full">
+      <table mat-table [dataSource]="dataSource"  *ngIf="showTable">
 
         <!-- ID Column -->
         <ng-container matColumnDef="srNo">

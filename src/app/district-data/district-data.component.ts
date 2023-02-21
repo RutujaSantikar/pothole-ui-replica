@@ -27,6 +27,7 @@ export class DistrictDataComponent implements OnInit, AfterViewInit{
   data:any[]=[];
    showExcel = false
    showFilter = false
+   showTable = false
 
  displayedColumns: string[] = ['disName', 'potDivision', 'sudName', 'total', 'assign', 'close', 'pending'];
  dataSource = new MatTableDataSource<any>;
@@ -217,6 +218,7 @@ export class DistrictDataComponent implements OnInit, AfterViewInit{
   view(){
     this.showExcel=true;
     this.showFilter=true;
+    this.showTable=true;
     const disData= this.dataForm.get('disData')?.value;
     const divisionData = this.dataForm.get('divisionData')?.value;
     const subDivisionData = this.dataForm.get('subDivisionData')?.value;
