@@ -6,7 +6,7 @@
         <mat-form-field appearance="outline" class=" sm:w-full" >
             <mat-label>District</mat-label>
             <mat-select formControlName="disData" (selectionChange)="onChangeDistrict()"  >
-              <mat-option *ngFor="let district of getDistrict" [value]="district.disId">
+           <mat-option *ngFor="let district of getDistrict" [value]="district.disId">
                 {{district.disName}}
               </mat-option>
             </mat-select>
@@ -14,7 +14,8 @@
 
           <mat-form-field appearance="outline"  class=" sm:w-full">
             <mat-label>Division</mat-label>
-            <mat-select formControlName="divisionData"  (selectionChange)="onChangeDivision()">
+            <mat-select formControlName="divisionData"  (selectionChange)="onChangeDivision()" >
+              <mat-option>Select</mat-option>
               <mat-option *ngFor="let division of getDivision" [value]="division.divId">
                {{division.divName}}
               </mat-option>
@@ -24,6 +25,7 @@
           <mat-form-field appearance="outline" class="sm:w-full">
             <mat-label>Subdivision</mat-label>
             <mat-select formControlName="subDivisionData">
+              <mat-option>Select</mat-option>
               <mat-option *ngFor="let subdivision of getSubDivision" [value]="subdivision.sudId" >
                {{subdivision.sudName}}
               </mat-option>
@@ -44,7 +46,7 @@
        <div class="filter-cont pt-5" *ngIf="showFilter">
         <mat-form-field class="example-full-width">
           <mat-label>Filter</mat-label>
-          <input type="text" matInput placeholder="Search by complained id " (keyup)="applyFilter($event)" >
+          <input type="text" matInput placeholder="Search" (keyup)="applyFilter($event)" >
           </mat-form-field>
 
        </div>
@@ -116,7 +118,7 @@
 
       </table>
 
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      <mat-paginator [pageSizeOptions]="[10,20,50]" aria-label="Select page of users"></mat-paginator>
     </div>
 
 
