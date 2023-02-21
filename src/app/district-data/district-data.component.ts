@@ -1,14 +1,12 @@
-import { Component , OnInit, ViewChild} from '@angular/core';
+import { Component , OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import { DistrictDataService } from './district-data.service';
 import { FormGroup , FormControl} from '@angular/forms';
 import { GlobalVarComponent } from '../global-var/global-var.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { SnackbarService } from './snackbar.service';
-import {MatSort} from '@angular/material/sort';
+// import {MatSort} from '@angular/material/sort';
 import * as XLSX from 'xlsx';
-// import { saveAs } from 'file-saver';
-
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -16,7 +14,7 @@ import * as FileSaver from 'file-saver';
   templateUrl: './district-data.component.html',
   styleUrls: ['./district-data.component.scss']
 })
-export class DistrictDataComponent implements OnInit{
+export class DistrictDataComponent implements OnInit, AfterViewInit{
 
 
  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
@@ -27,21 +25,30 @@ export class DistrictDataComponent implements OnInit{
   getSubDivision:any[]= [];
   showData:any[]=[];
   data:any[]=[];
+   showExcel = false
+   showFilter = false
 
  displayedColumns: string[] = ['disName', 'potDivision', 'sudName', 'total', 'assign', 'close', 'pending'];
  dataSource = new MatTableDataSource<any>;
 
 
 
-//  @ViewChild(MatPaginator) paginator:any= MatPaginator;
+ @ViewChild(MatPaginator) paginator:any= MatPaginator;
 //  @ViewChild(MatSort) sort: any=MatSort;
+
+
+  ngAfterViewInit() {
+
+    this.dataSource.paginator = this.paginator;
+
+  }
 
    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
 
    }
 
@@ -167,26 +174,13 @@ export class DistrictDataComponent implements OnInit{
 
 
 
-  ngOnInit(): void {
-
-    // this.dataSource.paginator = this.paginator;
-    // this.dataSource.sort = this.sort;
-
+  ngOnInit() {
     this.getDistrict=[];
     this.districtDataService.getDistrict().subscribe((response:any) => {
     console.log(response);
     this.getDistrict= response.data;
     console.log(this.getDistrict)
-
-
-
-
-
-
-
-
-
-  });
+});
     //   this.getDivision=[];
     //   this.districtDataService.getDivision(this.divId).subscribe((response:any) => {
     //   console.log(response);
@@ -221,6 +215,8 @@ export class DistrictDataComponent implements OnInit{
 
 
   view(){
+    this.showExcel=true;
+    this.showFilter=true;
     const disData= this.dataForm.get('disData')?.value;
     const divisionData = this.dataForm.get('divisionData')?.value;
     const subDivisionData = this.dataForm.get('subDivisionData')?.value;
@@ -230,15 +226,12 @@ export class DistrictDataComponent implements OnInit{
 
     this.showData = response[1].data;
       for(let i=0 ; i<this.showData.length ; i++){
-
-        this.data.push({
+       this.data.push({
           "District" : this.showData[i]['potDistrict'],
           "Division ": this.showData[i]['potDivision'],
           "SubDivision": this.showData[i]['potSubDivision'],
                   })
-
-
-      }
+                }
     console.log(this.dataSource.data);
 
     // this.dataSource = new MatTableDataSource<any>(response.data);
@@ -255,9 +248,6 @@ export class DistrictDataComponent implements OnInit{
         this.saveAsExcelFile(excelBuffer, 'Pothol');
      }
   saveAsExcelFile(buffer:any, fileName:string){
-
-    // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    //   this.saveAsExcelFile(excelBuffer, 'Pothol');
 
         const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
          FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
