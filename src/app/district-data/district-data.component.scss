@@ -8,7 +8,12 @@
 table{
   margin-top: 20px;
 }
-
+.example-container.mat-elevation-z8 {
+  overflow:scroll;
+}
+.example-container .mat-table.mat-table {
+  min-width: 450px;
+}
 
 .example-full-width {
   width: 100%;
