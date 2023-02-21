@@ -1,6 +1,6 @@
 <div class="data-card">
-<mat-card>
-  <mat-card-content class="p-5">
+<mat-card class="p-5">
+
     <form action="" [formGroup]="dataForm" class="flex flex-column justify-content-center gap-3 sm:gap-8 sm:flex sm:flex-row"  >
 
         <mat-form-field appearance="outline" class=" sm:w-full" >
@@ -38,9 +38,7 @@
       </div>
 
       <div class="icons-cont flex gap-3 pt-6">
-
-        <div class="excel-img" style="cursor: pointer;"><img src="../assets/excel.png"></div>
-        <div class="pdf-img"style="cursor: pointer;"><img src="../assets/pdf.png"></div>
+        <div class="excel-img" style="cursor: pointer;"> <button mat-raised-button  (click)="showInExcel()"><img src="../assets/excel.png"></button></div>
       </div>
 
        <div class="filter-cont pt-5">
@@ -52,8 +50,8 @@
        </div>
 
 
-   <div class="example-container " >
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 " >
+   <!-- <div class="example-container  " > -->
+      <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" > -->
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -77,7 +75,7 @@
         </ng-container> -->
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="disName">
+        <!-- <ng-container matColumnDef="disName">
           <th mat-header-cell *matHeaderCellDef> District Name </th>
           <td mat-cell *matCellDef="let element"> {{element.potDistrict}} </td>
         </ng-container>
@@ -85,9 +83,9 @@
         <ng-container matColumnDef="potDivision">
           <th mat-header-cell *matHeaderCellDef> Division</th>
           <td mat-cell *matCellDef="let element"> {{element.potDivision}} </td>
-        </ng-container>
+        </ng-container> -->
 
-        <ng-container matColumnDef="sudName">
+        <!-- <ng-container matColumnDef="sudName">
           <th mat-header-cell *matHeaderCellDef> SubDivision </th>
           <td mat-cell *matCellDef="let element"> {{element.potSubDivision}} </td>
         </ng-container>
@@ -95,9 +93,9 @@
         <ng-container matColumnDef="total">
           <th mat-header-cell *matHeaderCellDef> Total Pothole Report Count </th>
           <td mat-cell *matCellDef="let element"> {{element.total}} </td>
-        </ng-container>
+        </ng-container> -->
 
-        <ng-container matColumnDef="assign">
+        <!-- <ng-container matColumnDef="assign">
           <th mat-header-cell *matHeaderCellDef> Assign Pothole Count </th>
           <td mat-cell *matCellDef="let element"> {{element.assign}} </td>
         </ng-container>
@@ -105,9 +103,9 @@
         <ng-container matColumnDef="close">
           <th mat-header-cell *matHeaderCellDef> Close Pothole Count </th>
           <td mat-cell *matCellDef="let element"> {{element.close}} </td>
-        </ng-container>
+        </ng-container> -->
 
-        <ng-container matColumnDef="pending">
+        <!-- <ng-container matColumnDef="pending">
           <th mat-header-cell *matHeaderCellDef>Pending to Close Pothole </th>
           <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
         </ng-container>
@@ -117,10 +115,87 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      </div>
+      </div> -->
 
 
-    </mat-card-content>
+
+
+
+      <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="srNo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Sr No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.srno}} </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="region">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+          <td mat-cell *matCellDef="let element"> {{element.region}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="circle">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Circle </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Fruit Column -->
+        <ng-container matColumnDef="disName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>District Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.potDistrict}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="potDivision">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Division</th>
+          <td mat-cell *matCellDef="let element"> {{element.potDivision}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sudName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> SubDivision </th>
+          <td mat-cell *matCellDef="let element"> {{element.potSubDivision}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Pothole Report Count </th>
+          <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="assign">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Assign Pothole Count </th>
+          <td mat-cell *matCellDef="let element"> {{element.assign}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="close">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Close Pothole Count </th>
+          <td mat-cell *matCellDef="let element"> {{element.close}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pending">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Pending to Close Pothole </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+
+
+
+
+
+
 </mat-card>
 
 </div>

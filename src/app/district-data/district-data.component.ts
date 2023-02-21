@@ -1,10 +1,15 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit, ViewChild} from '@angular/core';
 import { DistrictDataService } from './district-data.service';
 import { FormGroup , FormControl} from '@angular/forms';
 import { GlobalVarComponent } from '../global-var/global-var.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { SnackbarService } from './snackbar.service';
+import {MatSort} from '@angular/material/sort';
+import * as XLSX from 'xlsx';
+// import { saveAs } from 'file-saver';
+
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-district-data',
@@ -14,16 +19,29 @@ import { SnackbarService } from './snackbar.service';
 export class DistrictDataComponent implements OnInit{
 
 
+ EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  EXCEL_EXTENSION = '.xlsx';
+
   getDistrict:any[]= [];
   getDivision:any[]= [];
   getSubDivision:any[]= [];
+  showData:any[]=[];
+  data:any[]=[];
 
  displayedColumns: string[] = ['disName', 'potDivision', 'sudName', 'total', 'assign', 'close', 'pending'];
  dataSource = new MatTableDataSource<any>;
 
+
+
+//  @ViewChild(MatPaginator) paginator:any= MatPaginator;
+//  @ViewChild(MatSort) sort: any=MatSort;
+
    applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
 
    }
 
@@ -150,11 +168,24 @@ export class DistrictDataComponent implements OnInit{
 
 
   ngOnInit(): void {
+
+    // this.dataSource.paginator = this.paginator;
+    // this.dataSource.sort = this.sort;
+
     this.getDistrict=[];
     this.districtDataService.getDistrict().subscribe((response:any) => {
     console.log(response);
     this.getDistrict= response.data;
     console.log(this.getDistrict)
+
+
+
+
+
+
+
+
+
   });
     //   this.getDivision=[];
     //   this.districtDataService.getDivision(this.divId).subscribe((response:any) => {
@@ -196,6 +227,18 @@ export class DistrictDataComponent implements OnInit{
     this.districtDataService.getPothol(disData, divisionData, subDivisionData).subscribe((response:any) => {
     console.log(response);
     this.dataSource.data = response[1].data;
+
+    this.showData = response[1].data;
+      for(let i=0 ; i<this.showData.length ; i++){
+
+        this.data.push({
+          "District" : this.showData[i]['potDistrict'],
+          "Division ": this.showData[i]['potDivision'],
+          "SubDivision": this.showData[i]['potSubDivision'],
+                  })
+
+
+      }
     console.log(this.dataSource.data);
 
     // this.dataSource = new MatTableDataSource<any>(response.data);
@@ -204,7 +247,22 @@ export class DistrictDataComponent implements OnInit{
 
   }
 
+     showInExcel(){
 
+        const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data);
+        const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, 'Pothol');
+     }
+  saveAsExcelFile(buffer:any, fileName:string){
+
+    // const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    //   this.saveAsExcelFile(excelBuffer, 'Pothol');
+
+        const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
+         FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
+
+  }
 
 }
 

@@ -13,7 +13,7 @@ export class GlobalVarComponent {
         public static divName='';
         public static sudId='';
 
-
+        
 
 }
 
