@@ -48,27 +48,49 @@ export class DistrictDataComponent implements OnInit{
       //   this.getDivision= response.data;
       //    this.getSubDivision=[];
       // });
-
       // }
       // else{
       //   this.getDivision=[];
       //   this.getSubDivision=[];
       // }
+                    // error message handling
+        // this.districtDataService.getDivision(disData).subscribe((response:any) => {
+        // console.log(response);
+        // if(response.status === "Success"){
+        //   this.getDivision= response.data;
+        //   this.getSubDivision=[];
+        // }
+        // else{
+        //       this.snackbarService.backendWarningSnackBar("Data not found")
+        // }
+        // })
 
-        this.districtDataService.getDivision(disData).subscribe((response:any) => {
+          this.districtDataService.getDivision(disData).subscribe((response:any) => {
 
-        console.log(response);
-        if(response.status === "Success"){
-          this.getDivision= response.data;
-          this.getSubDivision=[];
-        }
-        else{
-              this.snackbarService.backendWarningSnackBar("Data not found")
-        }
-        })
+             if(!response.error){
+              if(response.status === "Success"){
+                // console.log(response);
+
+                this.getSubDivision=[];
+
+                if(response.data.length >  0){
+
+                  this.getDivision= response.data;
+                }
+              }
+              else{
+                this.snackbarService.backendWarningSnackBar("Data not found")
+              }
+
+             }
+             else{
+                this.snackbarService.warningSnackBar(response.error)
+             }
+
+          });
 
 
-     }
+  }
 
 
      onChangeDivision(){
@@ -88,18 +110,47 @@ export class DistrictDataComponent implements OnInit{
 
 
       // }
+                    // error message handling
+      //  this.districtDataService.getSubDivision(disData,divisionData).subscribe((response:any) => {
+      //   if(response.status === "Success"){
+      //     console.log(response);
+      //     this.getSubDivision= response.data;
+      //   }
+      //   else{
+      //     this.snackbarService.backendWarningSnackBar("Data not found")
+      //   }
+      // })
 
-       this.districtDataService.getSubDivision(disData,divisionData).subscribe((response:any) => {
-        console.log(response);
-        if(response.status === "Success"){
-          this.getSubDivision= response.data;
-          this.getSubDivision=[];
-        }
-        else{
-          this.snackbarService.backendWarningSnackBar("Data not found")
-        }
+            this.districtDataService.getSubDivision(disData,divisionData).subscribe((response:any) => {
 
-       })
+            if(!response.error){
+            if(response.status === "Success"){
+              console.log(response);
+
+              if(response.data.length >  0){
+                this.getSubDivision= response.data;
+             }
+            }
+            else{
+              this.snackbarService.backendWarningSnackBar("Data not found")
+            }
+
+
+            }
+            else{
+              this.snackbarService.warningSnackBar(response.error)
+            }
+
+
+
+
+            })
+
+
+
+
+
+
      }
 
 
@@ -128,28 +179,26 @@ export class DistrictDataComponent implements OnInit{
 }
 
 
-       getDivisionByDistrict(divId:any){
+      //  getDivisionByDistrict(divId:any){
+      //   this.getDivision=[];
+      //   this.districtDataService.getDivision(divId).subscribe((response:any) => {
+      //   console.log(response);
+      //   this.getDivision= response.data;
+      //    this.getSubDivision=[];
+      // });
+      //  }
 
-        this.getDivision=[];
-        this.districtDataService.getDivision(divId).subscribe((response:any) => {
-        console.log(response);
-        this.getDivision= response.data;
-         this.getSubDivision=[];
-      });
-       }
-
-       getSubDivisionByDivision(disId:any,divId:any){
-        this.getSubDivision=[];
-        this.districtDataService.getSubDivision(disId,divId).subscribe((response:any) => {
-        console.log(response);
-        this.getSubDivision= response.data;
-      });
-    }
+    //    getSubDivisionByDivision(disId:any,divId:any){
+    //     this.getSubDivision=[];
+    //     this.districtDataService.getSubDivision(disId,divId).subscribe((response:any) => {
+    //     console.log(response);
+    //     this.getSubDivision= response.data;
+    //   });
+    // }
 
 
 
   view(){
-
     const disData= this.dataForm.get('disData')?.value;
     const divisionData = this.dataForm.get('divisionData')?.value;
     const subDivisionData = this.dataForm.get('subDivisionData')?.value;

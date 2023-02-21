@@ -9,10 +9,11 @@ table{
   margin-top: 20px;
 }
 .example-container.mat-elevation-z8 {
-  overflow:scroll;
+  overflow-x: scroll;
 }
 .example-container .mat-table.mat-table {
   min-width: 450px;
+  overflow-x: scroll;
 }
 
 .example-full-width {
