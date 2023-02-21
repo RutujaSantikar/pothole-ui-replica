@@ -21,6 +21,12 @@ export class DistrictDataComponent implements OnInit{
  displayedColumns: string[] = ['disName', 'potDivision', 'sudName', 'total', 'assign', 'close', 'pending'];
  dataSource = new MatTableDataSource<any>;
 
+   applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+   }
+
   // disId = GlobalVarComponent.disId;
   // disName = GlobalVarComponent.disName;
   // divId = GlobalVarComponent.divId;
@@ -134,27 +140,12 @@ export class DistrictDataComponent implements OnInit{
             else{
               this.snackbarService.backendWarningSnackBar("Data not found")
             }
-
-
             }
             else{
               this.snackbarService.warningSnackBar(response.error)
             }
-
-
-
-
             })
-
-
-
-
-
-
-     }
-
-
-
+            }
 
 
 
@@ -212,6 +203,7 @@ export class DistrictDataComponent implements OnInit{
   });
 
   }
+
 
 
 }

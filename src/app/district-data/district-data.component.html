@@ -3,7 +3,7 @@
   <mat-card-content class="p-5">
     <form action="" [formGroup]="dataForm" class="flex flex-column justify-content-center gap-3 sm:gap-8 sm:flex sm:flex-row"  >
 
-        <mat-form-field appearance="outline" class=" sm:w-3" >
+        <mat-form-field appearance="outline" class=" sm:w-full" >
             <mat-label>District</mat-label>
             <mat-select formControlName="disData" (selectionChange)="onChangeDistrict()"  >
               <mat-option *ngFor="let district of getDistrict" [value]="district.disId">
@@ -12,7 +12,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="outline"  class=" sm:w-3">
+          <mat-form-field appearance="outline"  class=" sm:w-full">
             <mat-label>Division</mat-label>
             <mat-select formControlName="divisionData"  (selectionChange)="onChangeDivision()">
               <mat-option *ngFor="let division of getDivision" [value]="division.divId">
@@ -21,7 +21,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="sm:w-3">
+          <mat-form-field appearance="outline" class="sm:w-full">
             <mat-label>Subdivision</mat-label>
             <mat-select formControlName="subDivisionData">
               <mat-option *ngFor="let subdivision of getSubDivision" [value]="subdivision.sudId" >
@@ -46,8 +46,7 @@
        <div class="filter-cont pt-5">
         <mat-form-field class="example-full-width">
           <mat-label>Filter</mat-label>
-          <input type="text" matInput
-                 placeholder="Search by complained id " >
+          <input type="text" matInput placeholder="Search by complained id " (keyup)="applyFilter($event)" >
           </mat-form-field>
 
        </div>
