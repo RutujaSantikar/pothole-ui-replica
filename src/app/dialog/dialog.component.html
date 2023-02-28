@@ -1,0 +1,24 @@
+
+
+
+  <div class="p-5 w-full " >
+   <div class="iconCont">
+
+    <!-- <button mat-icon-button mat-dialog-close="" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button> -->
+
+     <button  (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+     </button>
+   </div>
+    <h1 class="mt-2">Confirm Action</h1>
+    <p class="d-text py-3 text-base">Do you want to {{message}} user ?<p>
+      <div class="btnCont flex justify-end">
+    <button mat-raised-button  style="background-color: #abb2b4; color: white;" >No</button>
+    <button mat-raised-button  class="ml-5"
+    style="background-color:rgba(0,188,212,255); color: white;"
+      (click)="enable()">Yes</button>
+    </div>
+  </div>
+

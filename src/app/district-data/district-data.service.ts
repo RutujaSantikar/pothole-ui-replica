@@ -24,6 +24,8 @@ export class DistrictDataService {
     // queryParams =  queryParams.append('divName', divName);
     queryParams =  queryParams.append('disId', disData);
     return  this.http.get(url +  'getDivisionsV2?disId='+disData);
+
+
   }
 
   public getSubDivision( disData:any, divisionData:any) : Observable<any> {
@@ -45,6 +47,7 @@ export class DistrictDataService {
     // queryParams =  queryParams.append('divId', divisionData);
     // queryParams =  queryParams.append('sudId', subDivisionData);
     return  this.http.get(url + 'getPotholesV5?disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+    // return this.http.get(url + 'getSummaryReport?disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
   }
 
 }

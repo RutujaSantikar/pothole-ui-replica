@@ -1,0 +1,40 @@
+
+.users-container{
+
+   width: 90%;
+   margin:0 auto;
+}
+
+
+
+.addBtn{
+   font-size: 16px;
+  //  background-color:rgba(0,188,212,255);
+   border-radius:9px;
+   border: 1px lightslategray solid;
+   float: right;
+
+}
+
+.addBtn:hover{
+
+   background-color:rgb(182, 205, 249);
+   border: none;
+}
+
+.resetBtn:hover{
+
+   background-color:rgb(182, 205, 249);
+   border: none;
+}
+
+
+.resetBtn{
+   font-size: 16px;
+   border-radius:9px;
+  //  background-color:rgba(0,188,212,255);
+  border: 1px lightslategray solid;
+   float: right;
+
+}
+

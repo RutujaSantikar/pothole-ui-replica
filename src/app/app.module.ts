@@ -17,11 +17,19 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UsersComponent } from './users/users.component';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
+
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
     DistrictDataComponent,
-    GlobalVarComponent
+    GlobalVarComponent,
+    UsersComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +45,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatTabsModule
+
 
 
 
