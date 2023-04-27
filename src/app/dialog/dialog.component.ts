@@ -8,7 +8,7 @@ import { DialogService } from './dialog.service';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit{
 
 
     message = 'Active'

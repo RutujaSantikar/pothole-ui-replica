@@ -3,12 +3,12 @@
 
     <div class="dropdowns">
       <mat-card class="mat-card p-8 ">
-        <form action="" class="flex justify-around" [formGroup]="userForm">
+        <form action="" class="sm:flex sm:justify-between sm:items-center" [formGroup]="userForm">
           <mat-form-field appearance="outline" class=" district sm:w-3 " >
             <mat-label>District</mat-label>
             <mat-select  formControlName="disData"  (selectionChange)="onChangeDistrict()">
-              <mat-option>All</mat-option>
-           <mat-option *ngFor="let district of getDistrict" [value]="district.disId">{{district.disName }}</mat-option>
+              <!-- <mat-option [value]="1">All</mat-option> -->
+           <mat-option *ngFor="let district of getDistrict " [value]="district">{{district.disName }}</mat-option>
             </mat-select>
           </mat-form-field>
 
@@ -16,84 +16,90 @@
           <mat-form-field appearance="outline" class=" division sm:w-3" >
             <mat-label>Division</mat-label>
             <mat-select  formControlName="divisionData" (selectionChange)="onChangeDivision()">
-              <mat-option>All</mat-option>
-           <mat-option *ngFor="let division of getDivision" [value]="division.divId">{{division.divName}}</mat-option>
+              <!-- <mat-option value="1">All</mat-option> -->
+           <mat-option *ngFor="let division of getDivision" [value]="division">{{division.divName}}</mat-option>
             </mat-select>
           </mat-form-field>
 
 
 
           <mat-form-field appearance="outline" class=" subdivision sm:w-3" >
-            <mat-label>Division</mat-label>
+            <mat-label>Subdivision</mat-label>
             <mat-select formControlName="subDivisionData">
-              <mat-option>All</mat-option>
-           <mat-option *ngFor="let subdivision of getSubDivision" [value]="subdivision.sudId">{{subdivision.sudName}}</mat-option>
+              <!-- <mat-option value="1">All</mat-option> -->
+           <mat-option *ngFor="let subdivision of getSubDivision" [value]="subdivision">{{subdivision.sudName}}</mat-option>
             </mat-select>
           </mat-form-field>
 
+
+          <div class="searchBtn pb-[22px]">
+            <button  class="searchBtn px-6 py-3 " style="border-radius: 9px; font-size:16px; background-color:rgba(0,188,212,255); color: white;" (click)="viewData()">Search</button>
+           </div>
+
     </form>
 
-         <div class="searchBtn flex justify-center">
+         <!-- <div class="searchBtn flex justify-center">
           <button  class="searchBtn px-6 py-3 mt-5" style="border-radius: 9px; font-size:16px; background-color:rgba(0,188,212,255); color: white;" (click)="viewData()">Search</button>
-         </div>
+         </div> -->
 
           <div class="addnew mt-5 ">
-            <button class="addBtn p-3 ml-5">Reset Password</button>
-            <button class="resetBtn p-3">Add New User</button>
+
+            <button class="resetBtn p-3" (click)="addNewUser()">Add New User</button>
+            <button class="addBtn p-3 ml-5" (click)="resetPassword()">Reset Password</button>
           </div>
 
 
           <mat-tab-group dynamicHeight class="mt-5">
-            <mat-tab label="Active User">
-
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <mat-tab label="Active User" >
+              <div class="example-small-box mat-elevation-z4">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  *ngIf="showTable">
 
                 <!--- Note that these columns can be defined in any order.
                       The actual rendered columns are set as a property on the row definition" -->
 
                 <!-- Position Column -->
                 <ng-container matColumnDef="srNo">
-                  <th mat-header-cell *matHeaderCellDef> Sr No. </th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Sr No. </th>
                   <td mat-cell *matCellDef="let element let i= index"> {{i+1}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td mat-cell *matCellDef="let element"> {{element.usrName}} </td>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Name </th>
+                  <td mat-cell *matCellDef="let element"> {{element.usrFullName}} </td>
                 </ng-container>
 
                 <!-- Weight Column -->
                 <ng-container matColumnDef="emailid">
-                  <th mat-header-cell *matHeaderCellDef> EmailId </th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> EmailId </th>
                   <td mat-cell *matCellDef="let element"> {{element.usrEmailId}} </td>
                 </ng-container>
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="phone">
-                  <th mat-header-cell *matHeaderCellDef> Phone no </th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Phone no </th>
                   <td mat-cell *matCellDef="let element"> {{element.usrPhoneNumber}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="designation">
-                  <th mat-header-cell *matHeaderCellDef> Designation </th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Designation </th>
                   <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="division">
-                  <th mat-header-cell *matHeaderCellDef> Division</th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Division</th>
                   <td mat-cell *matCellDef="let element"> {{element.divName}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="subdivision">
-                  <th mat-header-cell *matHeaderCellDef> Subdivision</th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;"> Subdivision</th>
                   <td mat-cell *matCellDef="let element"> {{element.sudName}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="edit" stickyEnd>
-                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                  <th mat-header-cell *matHeaderCellDef style="color:#47484a;">Action</th>
                   <td mat-cell *matCellDef="let row">
-                  <mat-icon  class="  rounded-lg mr-3"  *ngIf="editBtn">create</mat-icon>
+                  <mat-icon  class="  rounded-lg mr-3"  *ngIf="editBtn" style="color: #5f6368;">create</mat-icon>
                   <mat-icon (click)="openDialog(row)"  class="  rounded-lg" ><img src="/assets/disable.png" alt=""></mat-icon>
                   </td>
                   </ng-container>
@@ -105,6 +111,7 @@
 
 
               </table>
+            </div>
               <mat-paginator [pageSizeOptions]="[10,20,50]" aria-label="Select page of users"></mat-paginator>
 
             </mat-tab>

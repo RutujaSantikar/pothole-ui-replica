@@ -21,15 +21,20 @@ import { UsersComponent } from './users/users.component';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { ResetPswdComponent } from './reset-pswd/reset-pswd.component';
+import { AdduserComponent } from './adduser/adduser.component';
 @NgModule({
   declarations: [
     AppComponent,
     DistrictDataComponent,
     GlobalVarComponent,
     UsersComponent,
-    DialogComponent
+    DialogComponent,
+    ResetPswdComponent,
+    AdduserComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     MatSnackBarModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule
 
 
 

@@ -1,0 +1,36 @@
+
+
+
+
+<div class="p-5 w-full " >
+  <div class="iconCont" style="float:right">
+    <button  (click)="closeDialog()">
+     <mat-icon style="color:  #5f6368; ;">close</mat-icon>
+    </button>
+  </div>
+   <h1 class="mt-2">Reset Password</h1>
+
+
+   <form class="example-form mt-5" [formGroup]="resetForm">
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input type="text"
+             aria-label="Number"
+             matInput
+             formControlName="usrNum"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let user of getUsers" [value]="user.usrPhoneNumber">
+                         {{ user.usrPhoneNumber}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <div class="btnCont flex justify-end">
+   <button mat-raised-button  class="ml-5"
+   style="background-color:rgba(0,188,212,255); color: white;"
+    >Reset Password</button>
+   </div>
+ </div>
+

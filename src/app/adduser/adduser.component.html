@@ -1,0 +1,97 @@
+<div class="p-5 w-full " >
+  <div class="iconCont" style="float:right">
+    <button  (click)="closeDialog()">
+     <mat-icon style="color:  #5f6368;">close</mat-icon>
+    </button>
+  </div>
+   <h1 class="mt-2">Add new user</h1>
+     <form action="" class=" sm:flex sm:flex-wrap mt-5 sm:w-full " [formGroup]="addUserForm">
+
+      <div class=" sm:w-6/12 " >
+      <mat-form-field appearance="outline"  class="sm:w-11/12"  >
+        <mat-label>Designation</mat-label>
+        <mat-select formControlName="designation" (selectionChange)="onChangeDesignation()">
+       <mat-option *ngFor="let designation of getDesignation" [value]="designation">{{designation.degName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+
+
+      <div class=" sm:w-6/12  " *ngIf="drop1">
+        <mat-form-field appearance="outline"  class="sm:w-11/12"  >
+          <mat-label>District</mat-label>
+          <mat-select formControlName="disData"  (selectionChange)="onChangeDistrict()">
+         <mat-option *ngFor="let district of getDistrict" [value]="district">{{district.disName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        </div>
+
+
+        <div class=" sm:w-6/12  " *ngIf="drop2">
+          <mat-form-field appearance="outline"  class="sm:w-11/12"  >
+            <mat-label>Division</mat-label>
+            <mat-select formControlName="divisionData" (selectionChange)="onChangeDivision()" >
+           <mat-option *ngFor="let division of getDivision" [value]="division">{{division.divName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+
+          <div class=" sm:w-6/12  " *ngIf="drop2drop">
+            <mat-form-field appearance="outline"  class="sm:w-11/12"  >
+              <mat-label>Division</mat-label>
+              <mat-select formControlName="divisionData" (selectionChange)="onChangeDivision()" multiple>
+             <mat-option *ngFor="let division of getDivision" [value]="division">{{division.divName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+
+
+          <div class=" sm:w-6/12  " *ngIf="drop3">
+            <mat-form-field appearance="outline"  class="sm:w-11/12" >
+              <mat-label>Subdivision</mat-label>
+              <mat-select formControlName="subDivisionData" multiple>
+             <mat-option *ngFor="let subdivision of getSubDivision" [value]="subdivision">{{subdivision.sudName}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+
+            <div class=" sm:w-6/12   ">
+            <mat-form-field  appearance="outline" class=" sm:w-11/12">
+              <mat-label>Full Name</mat-label>
+              <input matInput formControlName="fullName" >
+            </mat-form-field>
+            </div>
+
+            <div class=" sm:w-6/12  ">
+            <mat-form-field appearance="outline" class=" sm:w-11/12">
+              <mat-label>EmailId</mat-label>
+              <input matInput formControlName="emailId">
+            </mat-form-field>
+            </div>
+
+            <div class=" sm:w-6/12   ">
+            <mat-form-field  appearance="outline"  class=" sm:w-11/12">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" >
+            </mat-form-field>
+            </div>
+
+          <div class=" sm:w-6/12   ">
+            <mat-form-field appearance="outline" class=" sm:w-11/12" >
+              <mat-label>Password</mat-label>
+              <input matInput  formControlName="password">
+            </mat-form-field>
+          </div>
+</form>
+
+    <div class="btnCont flex justify-end pr-5">
+   <button mat-raised-button  style="background-color: #5f6368; color: white;" (click)="closeDialog()">Cancel</button>
+   <button mat-raised-button  class="ml-5"
+   style="background-color:rgba(0,188,212,255); color: white;" (click)="addUser()"
+    >Save</button>
+   </div>
+
+
+ </div>
+
+

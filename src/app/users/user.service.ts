@@ -43,8 +43,86 @@ export class UserService{
 
     public getUsers(disData:any, divisionData:any, subDivisionData:any):Observable<any>{
       const url = "http://114.143.217.43:8080/";
+      // return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
 
-      return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+      // if( (disData == undefined || divisionData == undefined || subDivisionData == undefined) || (disData == 0 || divisionData == 0 || subDivisionData == 0)  ){
+
+      //   // return this.http.get(url + 'getUsersByUgpV1?ugpId=1');
+
+      //   return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+      // }
+
+
+
+        // else if( disData &&   divisionData && subDivisionData){
+
+        //   return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+        // }
+        // else{
+
+        //   return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+
+        // }
+
+
+
+
+
+        if((disData == undefined || disData == null || disData == 0) &&
+         (divisionData == undefined || divisionData == null || divisionData == 0) &&
+          (subDivisionData == undefined || subDivisionData == null || subDivisionData == 0) ){
+          return this.http.get(url + 'getUsersByUgpV1?ugpId=1');
+        }
+
+
+        else if((disData != undefined || disData != null || disData != 0) &&
+        (divisionData == undefined || divisionData == null || divisionData == 0) &&
+        (subDivisionData == undefined || subDivisionData == null || subDivisionData == 0) ){
+          return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData);
+        }
+
+        else {
+
+          return this.http.get(url + 'getUsersByUgpV1?ugpId=1'+'&disId='+disData+'&divId='+divisionData+'&sudId='+subDivisionData);
+        }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -65,25 +143,5 @@ export class UserService{
 
 
 
-    // activeUser(usrId:any):Observable<any>{
-    //   return this.httpClient.post<any>(serverUrl + 'activeUser?usrId='+usrId,null)
-    // }
-
-    // inActiveUser(usrId:any){
-    //   return this.httpClient.post<any>(serverUrl + 'inActiveUser?usrId='+usrId,null)
-
-    // }
 
 
-
-
-
-
-
-
-
-
-
-
-
-}

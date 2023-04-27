@@ -87,9 +87,7 @@ EXCEL_EXTENSION = '.xlsx';
         //       this.snackbarService.backendWarningSnackBar("Data not found")
         // }
         // })
-
-
-              // proper error handling
+                 // proper error handling
           this.districtDataService.getDivision(disData).subscribe((response:any) => {
           if(!response.error){
               if(response.status === "Success"){
@@ -109,9 +107,7 @@ EXCEL_EXTENSION = '.xlsx';
              }
 
           });
-
-
-  }
+         }
 
 
 
@@ -129,8 +125,6 @@ EXCEL_EXTENSION = '.xlsx';
       // }
       // else{
       //   this.getSubDivision=[];
-
-
       // }
                     // error message handling
       //  this.districtDataService.getSubDivision(disData,divisionData).subscribe((response:any) => {
@@ -142,9 +136,7 @@ EXCEL_EXTENSION = '.xlsx';
       //     this.snackbarService.backendWarningSnackBar("Data not found")
       //   }
       // })
-
-
-              // proper error handling
+       // proper error handling
             this.districtDataService.getSubDivision(disData,divisionData).subscribe((response:any) => {
             if(!response.error){
               if(response.status === "Success"){
@@ -243,19 +235,18 @@ EXCEL_EXTENSION = '.xlsx';
   }
             //  to show excel
      showInExcel(){
-
         const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.data);
         const workbook: XLSX.WorkBook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
         const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         this.saveAsExcelFile(excelBuffer, 'Pothol');
      }
     //  to save excel
-  saveAsExcelFile(buffer:any, fileName:string){
+      saveAsExcelFile(buffer:any, fileName:string){
 
         const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
          FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
 
-  }
+     }
 
 }
 

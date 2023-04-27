@@ -24,9 +24,7 @@ export class DistrictDataService {
     // queryParams =  queryParams.append('divName', divName);
     queryParams =  queryParams.append('disId', disData);
     return  this.http.get(url +  'getDivisionsV2?disId='+disData);
-
-
-  }
+}
 
   public getSubDivision( disData:any, divisionData:any) : Observable<any> {
     const url = "http://114.143.217.43:8080/";
@@ -36,8 +34,7 @@ export class DistrictDataService {
     // queryParams =  queryParams.append('divName', divName);
     // queryParams =  queryParams.append('sudId', sudId);
     return  this.http.get(url + 'getSubDivisionsV2?disId='+disData+'&divId='+divisionData);
-
-  }
+}
 
 
   public getPothol( disData:any, divisionData:any, subDivisionData:any) : Observable<any> {
